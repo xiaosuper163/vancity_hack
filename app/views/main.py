@@ -35,3 +35,7 @@ def upload_file():
       # f.save(secure_filename(f.filename))
       f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
       return 'file uploaded successfully'
+
+@app.route('/cam')
+def cam():
+    return render_template('cam.html', title='cam')
