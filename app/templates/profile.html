@@ -1,0 +1,57 @@
+{% extends "subpage_layout.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="all"/>
+    <script src="/static/js/capture.js"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="table-wrapper">
+                    <table class="alt">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Item One</td>
+                          <td>Ante turpis integer aliquet porttitor.</td>
+                          <td>29.99</td>
+                        </tr>
+                        <tr>
+                          <td>Item Two</td>
+                          <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                          <td>19.99</td>
+                        </tr>
+                        <tr>
+                          <td>Item Three</td>
+                          <td> Morbi faucibus arcu accumsan lorem.</td>
+                          <td>29.99</td>
+                        </tr>
+                        <tr>
+                          <td>Item Four</td>
+                          <td>Vitae integer tempus condimentum.</td>
+                          <td>19.99</td>
+                        </tr>
+                        <tr>
+                          <td>Item Five</td>
+                          <td>Ante turpis integer aliquet porttitor.</td>
+                          <td>29.99</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="2"></td>
+                          <td>100.00</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+{% endblock %}
