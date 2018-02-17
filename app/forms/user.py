@@ -64,6 +64,8 @@ class SignUp(Form):
                      description='Name')
     surname = TextField(validators=[Required(), Length(min=2)],
                         description='Surname')
+    usertype = TextField(validators=[Required(), Length(min=2)],
+                      description='User Type')
     phone = TextField(validators=[Required(), Length(min=6)],
                       description='Phone number')
     email = TextField(validators=[Required(), Email(),

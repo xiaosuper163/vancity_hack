@@ -42,12 +42,9 @@ def upload_file():
 
 @app.route('/cam', methods = ['GET', 'POST'])
 def cam():
-
-
     if (request.method=="post"):
         cate = request.form["cate"]
         flash('Image submitted')
-
     return render_template('cam.html', title='Cam')
 
 

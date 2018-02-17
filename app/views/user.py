@@ -21,6 +21,7 @@ def signup():
         user = models.User(
             name=form.name.data,
             surname=form.surname.data,
+            usertype=form.usertype.data,
             phone=form.phone.data,
             email=form.email.data,
             confirmation=False,
