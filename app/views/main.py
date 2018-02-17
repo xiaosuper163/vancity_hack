@@ -1,7 +1,7 @@
 from flask import render_template, jsonify
 from app import app
 import random
-
+from flask import request, flash, get_flashed_messages
 
 @app.route('/')
 @app.route('/index')
@@ -27,6 +27,13 @@ def contact():
     return render_template('contact.html', title='Contact')
 
 
-@app.route('/cam')
+@app.route('/cam', methods = ['GET', 'POST'])
 def cam():
+
+    if (request.method=="post"):
+        cate = request.form["cate"]
+        flash('Image submitted')
+
     return render_template('cam.html', title='cam')
+    
+    
