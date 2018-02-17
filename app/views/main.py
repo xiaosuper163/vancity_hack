@@ -40,7 +40,7 @@ def contact():
 def upload_file():
    	if request.method == 'POST':
    		f = request.files['file']
-   		path = op.join(op.dirname(__file__), 'uploads/', f.filename)
+   		path = op.join(op.dirname(__file__), '../static/uploads/', f.filename)
    		f.save(path)
    		return "successful"
 
@@ -51,7 +51,7 @@ def convert_and_save(b64_string):
         b64_string += str(b'='* (4 - missing_padding))
 
     name = md5(str(localtime()).encode('utf-8')).hexdigest()+'.png'
-    path = op.join(op.dirname(__file__), 'uploads/', name)
+    path = op.join(op.dirname(__file__), '../static/uploads/', name)
     with open(path, "wb") as fh:
            fh.write(base64.decodebytes(str.encode(b64_string)))
     return name
@@ -59,7 +59,6 @@ def convert_and_save(b64_string):
 @app.route('/cam', methods = ['GET','POST'])
 def cam():
     if (request.method=="POST"):
-        print("test")
         f = request.form['file']
         name = convert_and_save(f)
         userid = current_user.get_id()
@@ -79,22 +78,23 @@ def cam():
 def label():
 
     # retrieve the image from the database
-    # op.join(op.dirname(__file__), 'uploads/', f.filename)
-    img_addr = "static/img/logo.jpg"
-    category = 'Green box'
-
+    p = models.Picture.query.filter_by(verified=None).first()
+    img_addr = op.join('static/uploads/', p.image_path)
+    category = p.tag
+    db.session.delete(p)
+    db.session.commit()
+    print("abc"+img_addr)
     if request.method == 'POST':
         if request.form['isCorrect'] == 'Yes':
             verified_res = True
         else:
             verified_res = False
-
-        # update the database
-
+        p.verified = verified_res
+        db.session.add(p)
         # retrieve the image from the database
-        img_addr = "static/img/logo.jpg"
-        category = 'Green box'
-
+        p = models.Picture.query.filter_by(verified=None).first()
+        category = p.tag
+        print("abc"+img_addr)
         return render_template('label_task.html', img_addr = img_addr, category = category)
-
+    
     return render_template('label_task.html', img_addr = img_addr, category = category)
