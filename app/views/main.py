@@ -47,4 +47,27 @@ def cam():
         flash('Image submitted')
     return render_template('cam.html', title='Cam')
 
+@app.route('/label_task', methods = ['GET', 'POST'])
+def label():
 
+    # retrieve the image from the database
+    img_addr = "static/img/logo.jpg"
+    category = 'Green box'
+
+
+    if request.method == 'POST':
+        if request.form['isCorrect'] == 'Yes':
+            verified_res = True
+        else:
+            verified_res = False
+
+        # update the database
+
+        # retrieve the image from the database
+        img_addr = "static/img/logo.jpg"
+        category = 'Green box'
+
+        return render_template('label_task.html', img_addr = img_addr, category = category)
+
+
+    return render_template('label_task.html', img_addr = img_addr, category = category)

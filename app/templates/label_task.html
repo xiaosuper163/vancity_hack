@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {% if img_addr %}
+	<img src="{{img_addr}}" style="max-width:500px; max-height:500px;"></img>
+    <h1>Category: {{category}}</h1>
+    <h1>Verified</h1>
+
+    <form action="" method=post>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="isCorrect" id="exampleRadios1" value="Yes" checked>
+            Correct
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="isCorrect" id="exampleRadios2" value="No">
+            Wrong
+          </label>
+        </div>
+        <button type=submit class="btn btn-dark">Submit</button>
+    </form>
+
+    {% endif %}
+
+
+
+{% endblock %}
