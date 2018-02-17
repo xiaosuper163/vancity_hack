@@ -1,7 +1,7 @@
 from flask.ext.wtf import Form
 from wtforms import TextField, PasswordField
 from wtforms.validators import (Required, Length, Email, ValidationError,
-                                EqualTo)
+                                EqualTo, NumberRange)
 from app.models import User
 
 

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    
+
     <div class="contentarea">
       <h1>
         Take a picture of Garbage
@@ -25,7 +25,7 @@
       <div class="output">
         <img id="photo" alt="The screen capture will appear in this box.">
       </div>
-      
+
         <form class="form-inline" method="post">
           <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Category</label>
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="cate" placeholder={{cate}}>
@@ -36,9 +36,31 @@
             <option value="3">Barbage bin</option>
           </select>
           <!-- Button trigger modal -->
-          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+          <input id="photo1" type = "text" name = "file" />
+          <button type="submit" class="btn btn-primary" >Submit</button>
+
+            <!-- Modal -->
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
         </form>
-        
+
         <h3>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
