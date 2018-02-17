@@ -3,6 +3,7 @@ from app import app
 import random
 from flask import Flask, render_template, request
 from werkzeug import secure_filename
+import os.path as op
 import os
 
 @app.route('/')
@@ -30,11 +31,11 @@ def contact():
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
-   if request.method == 'POST':
-      f = request.files['file']
-      # f.save(secure_filename(f.filename))
-      f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
-      return 'file uploaded successfully'
+   	if request.method == 'POST':
+   		f = request.files['file']
+   		path = op.join(op.dirname(__file__), 'uploads/', f.filename)
+   		f.save(path)
+   		return "successful"
 
 @app.route('/cam')
 def cam():
