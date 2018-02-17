@@ -11,7 +11,7 @@
     <h1>Verified</h1>
 
     <form action="" method=post>
-        <div class="form-check">
+ <!--        <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="radio" name="isCorrect" id="exampleRadios1" value="Yes" checked>
             Correct
@@ -22,12 +22,18 @@
             <input class="form-check-input" type="radio" name="isCorrect" id="exampleRadios2" value="No">
             Wrong
           </label>
+        </div> -->
+        <div class="4u 12u$(small)">
+            <input type="radio" id="label_correct" name="isCorrect" value="Yes" checked="">
+            <label for="label_correct">Correct</label>
+        </div>
+        <div class="4u 12u$(small)">
+            <input type="radio" id="label_wrong" name="isCorrect" value="No">
+            <label for="label_wrong">Wrong</label>
         </div>
         <button type=submit class="btn btn-dark">Submit</button>
     </form>
 
     {% endif %}
-
-
 
 {% endblock %}
