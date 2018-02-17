@@ -1,5 +1,5 @@
 from flask import render_template, jsonify, request
-from app import app
+from app import app, models, db
 import random
 
 from flask import request, flash, get_flashed_messages
@@ -59,20 +59,29 @@ def convert_and_save(b64_string):
 @app.route('/cam', methods = ['GET','POST'])
 def cam():
     if (request.method=="POST"):
+        print("test")
         f = request.form['file']
-        #userid = current_user.get_id()
         name = convert_and_save(f)
+        userid = current_user.get_id()
         cate = request.form["cate"]
-        flash('Image submitted')
+
+        p = models.Picture(
+            user_id=userid, 
+            tag=cate, 
+            image_path=name, 
+            verified=None
+        )
+        db.session.add(p)
+        db.session.commit()
     return render_template('cam.html', title='Cam')
 
 @app.route('/label_task', methods = ['GET', 'POST'])
 def label():
 
     # retrieve the image from the database
+    # op.join(op.dirname(__file__), 'uploads/', f.filename)
     img_addr = "static/img/logo.jpg"
     category = 'Green box'
-
 
     if request.method == 'POST':
         if request.form['isCorrect'] == 'Yes':
@@ -87,6 +96,5 @@ def label():
         category = 'Green box'
 
         return render_template('label_task.html', img_addr = img_addr, category = category)
-
 
     return render_template('label_task.html', img_addr = img_addr, category = category)
