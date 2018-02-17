@@ -30,9 +30,9 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return self.email
 
-class picture(db.Model):
+class Picture(db.Model):
 
-    __tablename__ = 'picture'
+    __tablename__ = 'pictures'
     id = db.Column(db.Integer, primary_key=True)
     tag = db.Column(db.String)
     image_path = db.Column(db.String)
