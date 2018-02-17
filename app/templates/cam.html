@@ -2,7 +2,7 @@
 
 {% block head %}
     {{ super() }}
-    <!-- <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="all"/> -->
+    <link rel="stylesheet" href="/static/css/main.css" type="text/css" media="all"/>
     <script src="/static/js/capture.js"/>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -60,18 +60,6 @@
               </div>
             </div> -->
         </form>
-
-        <h3>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul>
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-        </h3>
     </div>
 
 {% endblock %}
