@@ -104,5 +104,5 @@ def label():
 def profile():
     user = models.User.query.filter_by(email=current_user.get_id()).first()
     pic = models.Picture.query.filter_by(user_id=current_user.get_id()).count()
-    veri = models.Picture.query.filter_by(user_id=current_user.get_id(), verified = 'True').count()
+    veri = models.Picture.query.filter_by(user_id=current_user.get_id(), verified = None).count()
     return render_template('profile.html', user = user, pic=pic, veri=veri)
