@@ -25,3 +25,8 @@ def map_refresh():
 @app.route('/contact')
 def contact():
     return render_template('contact.html', title='Contact')
+
+
+@app.route('/cam')
+def cam():
+    return render_template('cam.html', title='cam')
