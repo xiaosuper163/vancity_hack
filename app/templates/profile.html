@@ -8,6 +8,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style type="text/css">
+        tbody tr {color: black}
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -15,52 +18,44 @@
                     <table class="alt">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Description</th>
-                          <th>Price</th>
+                          <th colspan="2"><h2>Personal Profile</h2></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td>Item One</td>
-                          <td>Ante turpis integer aliquet porttitor.</td>
-                          <td>29.99</td>
+                          <td>Name</td>
+                          <td>{{user.name}}</td>
                         </tr>
                         <tr>
-                          <td>Item Two</td>
-                          <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                          <td>19.99</td>
+                          <td>Surname</td>
+                          <td>{{user.surname}}</td>
                         </tr>
                         <tr>
-                          <td>Item Three</td>
-                          <td> Morbi faucibus arcu accumsan lorem.</td>
-                          <td>29.99</td>
+                          <td>Usertype</td>
+                          <td>{{user.usertype}}</td>
                         </tr>
                         <tr>
-                          <td>Item Four</td>
-                          <td>Vitae integer tempus condimentum.</td>
-                          <td>19.99</td>
+                          <td>Phone</td>
+                          <td>{{user.phone}}</td>
                         </tr>
                         <tr>
-                          <td>Item Five</td>
-                          <td>Ante turpis integer aliquet porttitor.</td>
-                          <td>29.99</td>
+                          <td>Email</td>
+                          <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                          <td>Coins</td>
+                          <td>{{user.coins}}</td>
+                        </tr>
+                        <tr>
+                          <td>Picture Uploaded</td>
+                          <td>{{pic}}</td>
+                        </tr>
+                        <tr>
+                          <td>Picture Verified</td>
+                          <td>{{veri}}</td>
                         </tr>
                       </tbody>
-                      <tfoot>
-                        <tr>
-                          <td colspan="2"></td>
-                          <td>100.00</td>
-                        </tr>
-                      </tfoot>
                     </table>
                   </div>
 {% endblock %}
-name: {{user.name}}</br>
-surname: {{user.surname}}</br>
-usertype: {{user.usertype}}</br>
-phone: {{user.phone}}</br>
-email: {{user.email}}</br>
-coins: {{user.coins}}</br>
-Picture Uploaded: {{pic}}
-Picture Verified: {{veri}}
+
