@@ -8,6 +8,10 @@ from flask import Flask, render_template, request
 from werkzeug import secure_filename
 import os.path as op
 import os
+import base64
+from hashlib import md5
+from time import localtime
+from flask_login import current_user
 
 @app.route('/')
 @app.route('/index')
@@ -40,9 +44,24 @@ def upload_file():
    		f.save(path)
    		return "successful"
 
-@app.route('/cam', methods = ['GET', 'POST'])
+def convert_and_save(b64_string):
+    b64_string = b64_string[22:]
+    missing_padding = len(b64_string) % 4
+    if missing_padding != 0:
+        b64_string += str(b'='* (4 - missing_padding))
+
+    name = md5(str(localtime()).encode('utf-8')).hexdigest()+'.png'
+    path = op.join(op.dirname(__file__), 'uploads/', name)
+    with open(path, "wb") as fh:
+           fh.write(base64.decodebytes(str.encode(b64_string)))
+    return name
+
+@app.route('/cam', methods = ['GET','POST'])
 def cam():
-    if (request.method=="post"):
+    if (request.method=="POST"):
+        f = request.form['file']
+        #userid = current_user.get_id()
+        name = convert_and_save(f)
         cate = request.form["cate"]
         flash('Image submitted')
     return render_template('cam.html', title='Cam')
