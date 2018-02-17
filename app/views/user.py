@@ -26,6 +26,7 @@ def signup():
             email=form.email.data,
             confirmation=False,
             password=form.password.data,
+            coins=0,
         )
         # Insert the user in the database
         db.session.add(user)

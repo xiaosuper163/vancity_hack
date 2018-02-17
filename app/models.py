@@ -13,18 +13,19 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.String)
     email = db.Column(db.String, primary_key=True)
     confirmation = db.Column(db.Boolean)
-    _password = db.Column(db.String)
+    password = db.Column(db.String)
+    coins = db.Column(db.Integer, default=0)
 
-    @hybrid_property
-    def password(self):
-        return self._password
+    # @hybrid_property
+    # def password(self):
+    #     return self._password
 
-    @password.setter
-    def _set_password(self, plaintext):
-        self._password = bcrypt.generate_password_hash(plaintext)
+    # @password.setter
+    # def _set_password(self, plaintext):
+    #     self._password = bcrypt.generate_password_hash(plaintext)
 
     def check_password(self, plaintext):
-        return bcrypt.check_password_hash(self.password, plaintext)
+        return True if self.password == plaintext else False
 
     def get_id(self):
         return self.email
@@ -33,9 +34,10 @@ class picture(db.Model):
 
     __tablename__ = 'picture'
     id = db.Column(db.Integer, primary_key=True)
-    caption = db.Column(db.String(500))
-    image_path = db.Column(db.String(500))
+    tag = db.Column(db.String)
+    image_path = db.Column(db.String)
+    user_id = db.Column(db.String) 
     verified = db.Column(db.Boolean, unique=False)
-
+    
     def get_id(self):
         return self.id
