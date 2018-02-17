@@ -1,7 +1,14 @@
-from flask import render_template, jsonify
+from flask import render_template, jsonify, request
 from app import app
 import random
+
 from flask import request, flash, get_flashed_messages
+
+from flask import Flask, render_template, request
+from werkzeug import secure_filename
+import os.path as op
+import os
+
 
 @app.route('/')
 @app.route('/index')
@@ -26,14 +33,22 @@ def map_refresh():
 def contact():
     return render_template('contact.html', title='Contact')
 
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+   	if request.method == 'POST':
+   		f = request.files['file']
+   		path = op.join(op.dirname(__file__), 'uploads/', f.filename)
+   		f.save(path)
+   		return "successful"
 
 @app.route('/cam', methods = ['GET', 'POST'])
 def cam():
+
 
     if (request.method=="post"):
         cate = request.form["cate"]
         flash('Image submitted')
 
     return render_template('cam.html', title='cam')
-    
-    
+
+
