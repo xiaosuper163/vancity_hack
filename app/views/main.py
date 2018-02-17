@@ -1,5 +1,5 @@
 from flask import render_template, jsonify, request
-from app import app
+from app import app, models
 import random
 
 from flask import request, flash, get_flashed_messages
@@ -12,6 +12,7 @@ import base64
 from hashlib import md5
 from time import localtime
 from flask_login import current_user
+from sqlalchemy import and_
 
 @app.route('/')
 @app.route('/index')
@@ -90,3 +91,10 @@ def label():
 
 
     return render_template('label_task.html', img_addr = img_addr, category = category)
+
+@app.route('/profile', methods = ['GET', 'POST'])
+def profile():
+    user = models.User.query.filter_by(email=current_user.get_id()).first()
+    pic = models.picture.query.filter_by(user_id=current_user.get_id()).count()
+    veri = models.picture.query.filter_by(user_id=current_user.get_id(), verified = 'True').count()
+    return render_template('profile.html', user = user, pic=pic, veri=veri)
