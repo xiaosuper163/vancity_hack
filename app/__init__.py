@@ -34,6 +34,10 @@ login_manager.login_view = 'userbp.signin'
 def load_user(email):
     return User.query.filter(User.email == email).first()
 
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 # Setup the admin interface
 from flask import request, Response
 from werkzeug.exceptions import HTTPException

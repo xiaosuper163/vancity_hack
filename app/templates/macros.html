@@ -13,6 +13,10 @@
 	{% endif %}
 {% endmacro %}
 
+{% macro li(endpoint, text) %}
+	<li><a href="{{ url_for(endpoint) }}">{{ text }}</a></li>
+{% endmacro %}
+
 <!-- Render a WTForm form's field (with it's possible associated errors) from a WTForms form -->
 {% macro render_field(field) %}
 	<div class="field">
