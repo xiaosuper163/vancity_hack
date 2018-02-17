@@ -9,7 +9,6 @@ from werkzeug import secure_filename
 import os.path as op
 import os
 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -49,6 +48,6 @@ def cam():
         cate = request.form["cate"]
         flash('Image submitted')
 
-    return render_template('cam.html', title='cam')
+    return render_template('cam.html', title='Cam')
 
 
