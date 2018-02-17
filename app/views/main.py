@@ -12,6 +12,7 @@ import base64
 from hashlib import md5
 from time import localtime
 from flask_login import current_user
+from sqlalchemy import and_
 
 @app.route('/')
 @app.route('/index')
@@ -66,9 +67,9 @@ def cam():
         cate = request.form["cate"]
 
         p = models.Picture(
-            user_id=userid, 
-            tag=cate, 
-            image_path=name, 
+            user_id=userid,
+            tag=cate,
+            image_path=name,
             verified=None
         )
         db.session.add(p)
@@ -98,3 +99,10 @@ def label():
         return render_template('label_task.html', img_addr = img_addr, category = category)
 
     return render_template('label_task.html', img_addr = img_addr, category = category)
+
+@app.route('/profile', methods = ['GET', 'POST'])
+def profile():
+    user = models.User.query.filter_by(email=current_user.get_id()).first()
+    pic = models.picture.query.filter_by(user_id=current_user.get_id()).count()
+    veri = models.picture.query.filter_by(user_id=current_user.get_id(), verified = 'True').count()
+    return render_template('profile.html', user = user, pic=pic, veri=veri)
