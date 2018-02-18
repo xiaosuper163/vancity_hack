@@ -31,7 +31,7 @@
 										<ul>
 										  	{{ m.li('index', 'Home') }}
 										  	{% if current_user.is_authenticated %}
-											  	{{ m.li('cam', 'Uploads') }}
+												{{ m.li('cam', 'Uploads') }}
 											  	{{ m.li('userbp.signout', 'Sign out') }}
 											{% else %}
 												<li><a href="/user/signup">Sign Up</a></li>
