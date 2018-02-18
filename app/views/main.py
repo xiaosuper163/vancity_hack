@@ -81,39 +81,44 @@ def label():
     if request.method == 'GET':
         # retrieve the image from the database
         p = models.Picture.query.filter_by(verified=None).first()
-        # if p is None:
-        #     p = models.Picture.query.filter_by().first()
-        img_addr = op.join('static/uploads/', p.image_path)
-        category = p.tag
-
-        print("11 img_path: " + img_addr + " cat: " + category)
+        if p is not None:
+            #     p = models.Picture.query.filter_by().first()
+            img_addr = op.join('static/uploads/', p.image_path)
+            category = p.tag
+            print("11 img_path: " + img_addr + " cat: " + category)
+        else:
+            img_addr = ""
+            category = ""
     else:
         p = models.Picture.query.filter_by(verified=None).first()
-        if p is None:
-            p = models.Picture.query.filter_by().first()
-        img_addr = op.join('static/uploads/', p.image_path)
-        category = p.tag
-        print("23 img_path: " + img_addr + " cat: " + category)
-
-        if request.form['isCorrect'] == 'Yes':
-            verified_res = True
-        else:
-            verified_res = False
-        p.verified = verified_res
-        db.session.commit()
-        # retrieve the image from the database
-        p = models.Picture.query.filter_by(verified=None).first()
-        addCoin = True
-        if p is None:
-            addCoin = False
-            # p = models.Picture.query.filter_by().first()
-        if addCoin:
-            u = models.User.query.filter_by().first()
-            u.coins = u.coins + 1
+        if p is not None:
+            img_addr = op.join('static/uploads/', p.image_path)
+            category = p.tag
+            print("23 img_path: " + img_addr + " cat: " + category)
+            
+            if request.form['isCorrect'] == 'Yes':
+                verified_res = True
+            else:
+                verified_res = False
+            p.verified = verified_res
             db.session.commit()
-        category = p.tag
-        print("24 img_path: " + img_addr + " cat: " + category)
-        return render_template('label_task.html', img_addr = img_addr, category = category)
+            # add coin
+            u = models.User.query.filter_by(email=current_user.get_id()).first()
+            u.coins = models.Picture.query.filter_by(user_id=current_user.get_id(), verified = True).count()
+            db.session.commit()
+            # retrieve the image from the database
+            p = models.Picture.query.filter_by(verified=None).first()
+            if p is not None:
+                category = p.tag
+                img_addr = op.join('static/uploads/', p.image_path)
+                print("24 img_path: " + img_addr + " cat: " + category + " coins: " + str(u.coins))
+                return render_template('label_task.html', img_addr = img_addr, category = category)
+            else:
+                img_addr = ""
+                category = ""
+        else:
+            img_addr = ""
+            category = ""
 
     return render_template('label_task.html', img_addr = img_addr, category = category)
 
