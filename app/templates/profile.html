@@ -56,5 +56,18 @@
                       </tbody>
                     </table>
                   </div>
+
+                  <div class="box alt">
+                    <div class="row uniform 50%">
+                      {% for image in photo %}
+                        <div class="4u">
+                          <span class="image fit">
+                            <a href="{{ url_for('static', filename='uploads/' + image) }}">{{ image }}</a></span>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+
                   {{photo}}
 {% endblock %}
