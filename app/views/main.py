@@ -80,10 +80,11 @@ def label():
 
     # retrieve the image from the database
     p = models.Picture.query.filter_by(verified=None).first()
+    if p is None:
+        p = models.Picture.query.filter_by().first()
     img_addr = op.join('static/uploads/', p.image_path)
     category = p.tag
-    db.session.delete(p)
-    db.session.commit()
+
     print("abc"+img_addr)
     if request.method == 'POST':
         if request.form['isCorrect'] == 'Yes':
@@ -91,11 +92,13 @@ def label():
         else:
             verified_res = False
         p.verified = verified_res
-        db.session.add(p)
+        db.session.commit()
         # retrieve the image from the database
         p = models.Picture.query.filter_by(verified=None).first()
+        if p is None:
+            p = models.Picture.query.filter_by().first()
         category = p.tag
-        print("abc"+img_addr)
+        print("img_path: " + img_addr)
         return render_template('label_task.html', img_addr = img_addr, category = category)
     
     return render_template('label_task.html', img_addr = img_addr, category = category)
