@@ -78,15 +78,23 @@ def cam():
 @app.route('/label_task', methods = ['GET', 'POST'])
 def label():
 
-    # retrieve the image from the database
-    p = models.Picture.query.filter_by(verified=None).first()
-    if p is None:
-        p = models.Picture.query.filter_by().first()
-    img_addr = op.join('static/uploads/', p.image_path)
-    category = p.tag
+    if request.method == 'GET':
+        # retrieve the image from the database
+        p = models.Picture.query.filter_by(verified=None).first()
+        # if p is None:
+        #     p = models.Picture.query.filter_by().first()
+        img_addr = op.join('static/uploads/', p.image_path)
+        category = p.tag
 
-    print("2 img_path: " + img_addr + " cat: " + category)
-    if request.method == 'POST':
+        print("11 img_path: " + img_addr + " cat: " + category)
+    else:
+        p = models.Picture.query.filter_by(verified=None).first()
+        if p is None:
+            p = models.Picture.query.filter_by().first()
+        img_addr = op.join('static/uploads/', p.image_path)
+        category = p.tag
+        print("23 img_path: " + img_addr + " cat: " + category)
+
         if request.form['isCorrect'] == 'Yes':
             verified_res = True
         else:
@@ -98,13 +106,13 @@ def label():
         addCoin = True
         if p is None:
             addCoin = False
-            p = models.Picture.query.filter_by().first()
+            # p = models.Picture.query.filter_by().first()
         if addCoin:
             u = models.User.query.filter_by().first()
             u.coins = u.coins + 1
             db.session.commit()
         category = p.tag
-        print("2 img_path: " + img_addr + " cat: " + category)
+        print("24 img_path: " + img_addr + " cat: " + category)
         return render_template('label_task.html', img_addr = img_addr, category = category)
 
     return render_template('label_task.html', img_addr = img_addr, category = category)
