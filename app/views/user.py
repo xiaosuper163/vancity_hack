@@ -44,7 +44,7 @@ def signup():
         email.send(user.email, subject, html)
         # Send back to the home page
         flash('Check your emails to confirm your email address.', 'positive')
-        return redirect(url_for('index'))
+        return redirect(url_for('cam'))
     return render_template('user/signup.html', form=form, title='Sign up')
 
 
