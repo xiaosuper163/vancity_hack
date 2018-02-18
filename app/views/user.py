@@ -79,7 +79,7 @@ def signin():
                 login_user(user)
                 # Send back to the home page
                 flash('Succesfully signed in.', 'positive')
-                return redirect(url_for('index'))
+                return redirect(url_for('cam'))
             else:
                 flash('The password you have entered is wrong.', 'negative')
                 return redirect(url_for('userbp.signin'))
