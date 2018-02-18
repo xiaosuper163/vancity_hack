@@ -85,7 +85,7 @@ def label():
     img_addr = op.join('static/uploads/', p.image_path)
     category = p.tag
 
-    print("abc"+img_addr)
+    print("2 img_path: " + img_addr + " cat: " + category)
     if request.method == 'POST':
         if request.form['isCorrect'] == 'Yes':
             verified_res = True
@@ -95,10 +95,16 @@ def label():
         db.session.commit()
         # retrieve the image from the database
         p = models.Picture.query.filter_by(verified=None).first()
+        addCoin = True
         if p is None:
+            addCoin = False
             p = models.Picture.query.filter_by().first()
+        if addCoin:
+            u = models.User.query.filter_by().first()
+            u.coins = u.coins + 1
+            db.session.commit()
         category = p.tag
-        print("img_path: " + img_addr)
+        print("2 img_path: " + img_addr + " cat: " + category)
         return render_template('label_task.html', img_addr = img_addr, category = category)
     
     return render_template('label_task.html', img_addr = img_addr, category = category)
