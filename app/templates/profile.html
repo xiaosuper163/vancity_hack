@@ -62,7 +62,8 @@
                       {% for image in photo %}
                         <div class="4u">
                           <span class="image fit">
-                            <a href="{{ url_for('static', filename='uploads/' + image) }}">{{ image }}</a></span>
+                            <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="">
+                          </span>
                         </div>
                       {% endfor %}
                     </div>
