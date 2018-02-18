@@ -100,7 +100,7 @@ def label():
         category = p.tag
         print("img_path: " + img_addr)
         return render_template('label_task.html', img_addr = img_addr, category = category)
-    
+
     return render_template('label_task.html', img_addr = img_addr, category = category)
 
 @app.route('/profile', methods = ['GET', 'POST'])
@@ -108,4 +108,8 @@ def profile():
     user = models.User.query.filter_by(email=current_user.get_id()).first()
     pic = models.Picture.query.filter_by(user_id=current_user.get_id()).count()
     veri = models.Picture.query.filter_by(user_id=current_user.get_id(), verified = True).count()
-    return render_template('profile.html', user = user, pic=pic, veri=veri)
+    photo=[]
+    photos = models.Picture.query.filter_by(user_id=current_user.get_id()).all()
+    for i in photos:
+    	photo.append(i.image_path)
+    return render_template('profile.html', user = user, pic=pic, veri=veri, photo=photo)
