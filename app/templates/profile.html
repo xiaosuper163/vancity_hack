@@ -56,4 +56,21 @@
                       </tbody>
                     </table>
                   </div>
+
+                  <h3> Uploaded Images</h3>
+                  {% if photo|length %}
+                    <div class="box alt">
+                      <div class="row uniform 50%">
+                        {% for image in photo %}
+                          <div class="4u">
+                            <span class="image fit">
+                              <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="">
+                            </span>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                      <p>No photo is uploaded</p>
+                  {% endif %}
 {% endblock %}
