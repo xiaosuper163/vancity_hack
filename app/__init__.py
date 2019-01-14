@@ -6,15 +6,15 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 # Setup the database
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
 
 # Setup the mail server
-from flask.ext.mail import Mail
+from flask_mail import Mail
 mail = Mail(app)
 
 # Setup the password crypting
-from flask.ext.bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
 # Import the views
@@ -22,7 +22,7 @@ from app.views import main, user, error
 app.register_blueprint(user.userbp)
 
 # Setup the user login process
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 from app.models import User
 
 login_manager = LoginManager()
@@ -42,9 +42,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 from flask import request, Response
 from werkzeug.exceptions import HTTPException
 from flask_admin import Admin
-from flask.ext.admin.contrib.sqla import ModelView
-from flask.ext.login import LoginManager
-from flask.ext.admin.contrib.fileadmin import FileAdmin
+from flask_admin.contrib.sqla import ModelView
+from flask_login import LoginManager
+from flask_admin.contrib.fileadmin import FileAdmin
 import os.path as op
 
 admin = Admin(app, name='Admin', template_mode='bootstrap3')
